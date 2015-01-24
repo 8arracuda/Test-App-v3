@@ -1,12 +1,13 @@
-sdApp.directive('ngStrDataDatasetLoader', function () {
+sdApp.directive('ngStrDatenDatasetLoader', function () {
 
     return {
         restrict: 'A',
-        templateUrl: '/www/customAngularDirectives/StrDataDatasetLoader.html'
+        templateUrl: '/www/customAngularDirectives/StrDatenDatasetLoader.html'
     }
 
+
 })
-    .controller('strDataDatasetLoaderCtrl', function ($scope, $rootScope, testDataFactory) {
+    .controller('strDatenDatasetLoaderCtrl', function ($scope, $rootScope, testDataFactory) {
 
         $rootScope.verifyTestsOutput = true;
 
@@ -71,6 +72,10 @@ sdApp.directive('ngStrDataDatasetLoader', function () {
             $scope.toggle('datasetSelectionOverlay', 'on');
         };
 
+        //$scope.test = function () {
+        //    alert('test');
+        //};
+
         $scope.decreaseNumberOfRowsBy = function (i) {
             $rootScope.numberOfRows = $rootScope.numberOfRows - i;
 
@@ -119,33 +124,23 @@ sdApp.directive('ngPrepareSectionForTests', function () {
 
 });
 
-sdApp.directive('ngOpenDatabaseButton', function () {
-
+sdApp.directive('ngOpenDatabaseSectionWebsql', function () {
 
     return {
         restrict: 'A',
-        templateUrl: '/www/customAngularDirectives/OpenDatabaseButton.html'
+        templateUrl: '/www/customAngularDirectives/OpenDatabaseSectionWebsql.html'
     }
 
 });
 
-//sdApp.directive('ngOpenDatabaseSectionWebsql', function () {
-//
-//    return {
-//        restrict: 'A',
-//        templateUrl: '/www/customAngularDirectives/OpenDatabaseSectionWebsql.html'
-//    }
-//
-//});
-//
-//sdApp.directive('ngOpenDatabaseSectionSqliteplugin', function () {
-//
-//    return {
-//        restrict: 'A',
-//        templateUrl: '/www/customAngularDirectives/OpenDatabaseSectionSqliteplugin.html'
-//    }
-//
-//});
+sdApp.directive('ngOpenDatabaseSectionSqliteplugin', function () {
+
+    return {
+        restrict: 'A',
+        templateUrl: '/www/customAngularDirectives/OpenDatabaseSectionSqliteplugin.html'
+    }
+
+});
 
 sdApp.directive('ngOpenDatabaseSection', function () {
 
@@ -174,20 +169,20 @@ sdApp.directive('ngResultsForPlatformTests', function () {
 
 });
 
-sdApp.directive('ngMediadataImageSelector', function () {
+sdApp.directive('ngMediendatenImageSelector', function () {
 
     return {
         restrict: 'A',
-        templateUrl: '/www/customAngularDirectives/MediadataImageSelector.html'
+        templateUrl: '/www/customAngularDirectives/MediendatenImageSelector.html'
     }
 
 
 })
-    .controller('MediadataImageSelectorCtrl', function ($scope, $rootScope) {
+    .controller('MediendatenImageSelectorCtrl', function ($scope, $rootScope) {
 
 
         $rootScope.images = [
-            'res/logo_brs.jpg', 'res/logo_angularJS.jpg', 'res/logo_cordova.jpg'
+            '/www/res/logo_brs.jpg', '/www/res/logo_angularJS.jpg', '/www/res/logo_cordova.jpg'
         ];
 
 
@@ -211,18 +206,18 @@ sdApp.directive('ngMediadataImageSelector', function () {
 
     });
 
-sdApp.directive('ngMediadataVideoSelector', function () {
+sdApp.directive('ngMediendatenVideoSelector', function () {
 
     return {
         restrict: 'A',
-        templateUrl: '/www/customAngularDirectives/MediadataVideoSelector.html'
+        templateUrl: '/www/customAngularDirectives/MediendatenVideoSelector.html'
     }
 
 })
-    .controller('MediadataVideoSelectorCtrl', function ($scope, $rootScope) {
+    .controller('MediendatenVideoSelectorCtrl', function ($scope, $rootScope) {
 
         $rootScope.videos = [
-            'res/H264_test4_Talkingheadclipped_mp4_480x320.mp4', 'res/H264_test1_Talkinghead_mp4_480x360.mp4', 'res/mov_bbb.mp4'
+            '/www/res/H264_test4_Talkingheadclipped_mp4_480x320.mp4', '/www/res/H264_test1_Talkinghead_mp4_480x360.mp4', '/www/res/mov_bbb.mp4'
         ];
 
 
@@ -244,3 +239,4 @@ sdApp.directive('ngMediadataVideoSelector', function () {
             }
         };
     });
+
