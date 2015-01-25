@@ -72,10 +72,6 @@ sdApp.directive('ngStrDatenDatasetLoader', function () {
             $scope.toggle('datasetSelectionOverlay', 'on');
         };
 
-        //$scope.test = function () {
-        //    alert('test');
-        //};
-
         $scope.decreaseNumberOfRowsBy = function (i) {
             $rootScope.numberOfRows = $rootScope.numberOfRows - i;
 

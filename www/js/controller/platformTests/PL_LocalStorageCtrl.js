@@ -10,16 +10,6 @@ sdApp.controller('PL_LocalStorageCtrl', function ($scope, $rootScope, TestHelper
 
     $scope.prepare = function () {
 
-
-
-
-
-
-
-
-
-
-
         localStorage.clear();
         $scope.isPrepared = true;
         $scope.currentIteration = '';

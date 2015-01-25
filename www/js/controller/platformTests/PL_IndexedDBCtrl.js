@@ -2,8 +2,6 @@ sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFacto
 
     $rootScope.section = 'PL';
 
-    var data;
-
     var dbName = "PL_Test1";
     var objStoreName = "PL_Test1";
 
@@ -14,9 +12,6 @@ sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFacto
     $scope.result = '';
     $scope.isPrepared = false;
     $scope.testInProgress = false;
-
-    var keyPrefix;
-    var value;
 
     $scope.prepare = function () {
         clearObjectStore();
@@ -36,65 +31,6 @@ sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFacto
             console.log('prepare function finished');
         });
     };
-
-    //function clearObjectStore() {
-    //
-    //    var transaction = $scope.db.transaction([objStoreName], "readwrite");
-    //    var objectStore = transaction.objectStore(objStoreName);
-    //
-    //    objectStore.clear();
-    //    objectStore.onsuccess = function (evt) {
-    //        console.log('onSuccess');
-    //
-    //    };
-    //    objectStore.onerror = function (event) {
-    //        console.error("clearObjectStore:", event.target.errorCode);
-    //
-    //    };
-    //
-    //    transaction.oncomplete = function (event) {
-    //        console.log('onComplete');
-    //        $scope.isPrepared = true;
-    //        $scope.testInProgress = false;
-    //        $scope.$apply();
-    //
-    //    };
-    //
-    //};
-
-    //$scope.startPlatformTest = function () {
-    //
-    //    $scope.testInProgress = true;
-    //    var datasetStringToSave = testDataFactory.getDatasetWithOffset(0);
-    //
-    //    var transaction = $scope.db.transaction([objStoreName], "readwrite");
-    //
-    //    console.dir(data);
-    //    var objectStore = transaction.objectStore(objStoreName);
-    //
-    //    for (var i = 0; i < 100; i++) {
-    //
-    //        //localStorage.setItem(keyPrefix + '' + fillWithZeroes(10, i), value);
-    //        //var objectToStore = {keyName: keyPrefix + '' + fillWithZeroes(10,i), value: value};
-    //
-    //        objectStore.add(i, datasetStringToSave);
-    //
-    //    }
-    //
-    //    transaction.oncomplete = function (event) {
-    //
-    //        $scope.testInProgress = false;
-    //        $scope.isPrepared = false;
-    //        $scope.$apply();
-    //
-    //    };
-    //
-    //    transaction.onerror = function (event) {
-    //        console.error('transaction.onerror (in startPerformanceTest_onlyOne)');
-    //        $scope.testInProgress = false;
-    //    };
-    //
-    //};
 
     $scope.openDatabase = function () {
         console.log('openDatabase start');
@@ -124,8 +60,6 @@ sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFacto
                 console.log('request.onupgradeneeded (in openDatabase)');
                 $scope.db = event.target.result;
 
-                //$scope.db.deleteObjectStore(objStoreName);
-
                 //create a new objectStore
                 var objectStore = $scope.db.createObjectStore(objStoreName, {});
 
@@ -133,31 +67,12 @@ sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFacto
         }
     };
 
-    ////TODO extract this to a factory or service
-    //function fillWithZeroes(fillToLength, number) {
-    //
-    //    var len = number.toString().length;
-    //
-    //    var number_new = '';
-    //    if (len < fillToLength) {
-    //        var zeroesToAdd = fillToLength - len;
-    //
-    //        for (var k = 0; k < zeroesToAdd; k++) {
-    //            number_new = '0' + number_new;
-    //        }
-    //    }
-    //    return number_new + "" + number;
-    //
-    //};
-
     $scope.startPlatformTest = function () {
 
         $scope.currentIteration = 0;
 
         var errorAlreadyShown = false;
 
-        //var datasetStringToSave = testDataFactory.getDatasetWithOffset(0);
-        //var datasetStringToSave = JSON.stringify(testDataFactory.getDatasetForPlatformTest());
         var datasetStringToSave = JSON.stringify(testDataFactory.getDatasetForPlatformTest());
 
         var transaction;
