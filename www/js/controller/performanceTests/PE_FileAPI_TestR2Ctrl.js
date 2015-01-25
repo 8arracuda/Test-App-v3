@@ -87,7 +87,6 @@ sdApp.controller('PE_FileAPI_TestR2Ctrl', function ($scope, $rootScope, testData
                     function readNextFile() {
 
                         var currentAddressId = parseInt(i / 9);
-                        console.log(id);
                         switch (i % 9) {
                             case 0:
                                 filename = currentAddressId + '_id.txt';
