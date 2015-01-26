@@ -127,7 +127,7 @@ sdApp.controller('PE_FileAPI_TestU1Ctrl', function ($scope, $rootScope, testData
 
         }
 
-    };
+    }
 
     $scope.startPerformanceTest = function () {
 
@@ -145,7 +145,7 @@ sdApp.controller('PE_FileAPI_TestU1Ctrl', function ($scope, $rootScope, testData
                                     //console.log(fileEntry.name + ' written successfully.');
 
                                     //calls the function again to write the next file
-                                    if (i < amountOfData) {
+                                    if (i < amountOfData-1) {
                                     writeAddress(i + 1);
                                         } else {
 

@@ -32,6 +32,19 @@ sdApp.controller('PE_SessionStorage_TestC1Ctrl', function ($scope, $rootScope, t
 
         };
 
+        $scope.reset = function () {
+
+            var answer = confirm('Do you really want to reset this page. All test results will be removed!');
+
+            if (answer) {
+                iteration = 1;
+                $scope.isPrepared = false;
+                $scope.results = [];
+                $scope.selectedTestVariant = '';
+            }
+
+        };
+
         $scope.startPerformanceTest = function() {
 
             $scope.testInProgress = true;

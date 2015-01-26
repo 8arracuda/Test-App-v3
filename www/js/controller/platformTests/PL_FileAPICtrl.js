@@ -31,9 +31,8 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
                 var datasetStringToSave = testDataFactory.getDatasetForPlatformTest();
                 function writeFile() {
 
-                    //if (i < amountOfData) {
+
                         var filename = i + '.txt';
-                        console.log('fs.root in writeFile');
                         fs.root.getFile(filename, {create: true}, function (fileEntry) {
 
                             fileEntry.createWriter(function (fileWriter) {
