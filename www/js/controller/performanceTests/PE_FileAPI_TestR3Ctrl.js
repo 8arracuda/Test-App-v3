@@ -168,7 +168,7 @@ sdApp.controller('PE_FileAPI_TestR3Ctrl', function ($scope, $rootScope, testData
             errorHandler
         );
 
-    };
+    }
 
 
     function errorHandler(e) {

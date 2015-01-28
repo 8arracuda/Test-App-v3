@@ -67,7 +67,7 @@ sdApp.controller('PE_LocalStorage_TestR3Ctrl', function ($scope, $rootScope, tes
                 }
             }
         }
-    };
+    }
 
     function clearLocalStorage() {
 

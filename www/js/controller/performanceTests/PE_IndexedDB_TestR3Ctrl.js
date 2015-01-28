@@ -26,7 +26,7 @@ sdApp.controller('PE_IndexedDB_TestR3Ctrl', function ($scope, $rootScope, testDa
 
         data = testDataFactory.testData();
 
-    };
+    }
 
     $scope.selectTestVariant = function (testVariant) {
         $scope.selectedTestVariant = testVariant;

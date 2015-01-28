@@ -4031,11 +4031,18 @@ angular.module('testDataFactory', [])
 
                 var dataCombined = testData.concat(testDataForUpdateTests);
                 var offset = (100 * parseInt(factor))%dataCombined.length;
-                data1 = null;
-                data2 = null;
 
                 var newData = dataCombined.slice(offset, 4000);
                 return newData.concat(dataCombined.slice(0, offset));
+
+            },
+
+            getBigDataset: function() {
+                //var data1 = JSON.parse(FileHelper.readStringFromFileAtPath(filename));
+                //var data2 = JSON.parse(FileHelper.readStringFromFileAtPath(filenameForUpdateTests));
+                var dataCombined = testData.concat(testDataForUpdateTests);
+
+                return dataCombined;
 
             },
 
