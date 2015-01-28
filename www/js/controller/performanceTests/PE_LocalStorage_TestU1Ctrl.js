@@ -85,7 +85,7 @@ sdApp.controller('PE_LocalStorage_TestU1Ctrl', function ($scope, $rootScope, tes
 
         }
 
-    };
+    }
 
     function clearLocalStorage() {
 
@@ -113,6 +113,16 @@ sdApp.controller('PE_LocalStorage_TestU1Ctrl', function ($scope, $rootScope, tes
         console.log('prepare function finished');
         $scope.$apply();
     };
+
+    //$scope.prepare = function () {
+    //
+    //    clearLocalStorage();
+    //    loadData();
+    //    $scope.isPrepared = true;
+    //    console.log('prepare function finished');
+    //    $scope.$apply();
+    //
+    //};
 
 })
 ;
