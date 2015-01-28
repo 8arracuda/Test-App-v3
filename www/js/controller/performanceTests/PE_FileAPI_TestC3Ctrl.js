@@ -74,9 +74,10 @@ sdApp.controller('PE_FileAPI_TestC3Ctrl', function ($scope, $rootScope, testData
         $scope.inProgress = true;
 
         var datasetArray = [];
-        for (var i=0; i<amountOfData; i++) {
-            datasetArray.push(testDataFactory.getDatasetWithOffset(i));
-        }
+        //for (var i=0; i<amountOfData; i++) {
+        //    datasetArray.push(testDataFactory.getDatasetWithOffset(i));
+        //}
+        var datasetString = JSON.stringify(testDataFactory.getBigDataset());
 
         var timeStart = new Date().getTime();
         window.requestFileSystem(window.PERSISTENT, 1024 * 1024,
@@ -112,7 +113,7 @@ sdApp.controller('PE_FileAPI_TestC3Ctrl', function ($scope, $rootScope, testData
 
                                 //overwrites the file from the beginning
                                 fileWriter.seek(0);
-                                fileWriter.write(JSON.stringify(datasetArray[i]));
+                                fileWriter.write(JSON.stringify(datasetString));
 
                             }, errorHandler);
 
