@@ -37,19 +37,14 @@ var app = {
     }
 };
 
-//TODO For debugging on a desktop browser
-userAgentForDesktopDevelopment1 = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36';
-userAgentForDesktopDevelopment2 = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.1.25 (KHTML, like Gecko) Version/8.0 Safari/600.1.25';
-if (navigator.userAgent==userAgentForDesktopDevelopment1 || navigator.userAgent==userAgentForDesktopDevelopment2) {
-    setTimeout(function () {
-        alert('no cordova');
-        var htmlElement = document.getElementsByTagName("html")[0];
-        angular.bootstrap(htmlElement, ['sdApp']);
-    }, 6000);
+startAngularJS = function() {
+    console.log('startAngularJS');
+    alert('Angular JS will be bootstrapped, but no cordova functions will be available.')
+    var htmlElement = document.getElementsByTagName("html")[0];
+    angular.bootstrap(htmlElement, ['sdApp']);
 
-}
+};
 
-//var sdApp = angular.module('sdApp', ["ngRoute", "mobile-angular-ui", "TestHelperFactory", "techSupportFactory", "IndexedDBClearObjectStore", "FileApiDeleteAllFilesFactory", "testDataFactory", "PE_ParameterFactory", "ngAnimate"]);
 var sdApp = angular.module('sdApp', ["ngRoute", "mobile-angular-ui", "TestHelperFactory", "techSupportFactory", "SQLDatabaseClearTable", "IndexedDBClearObjectStore", "FileApiDeleteAllFilesFactory", "testDataFactory", "PE_ParameterFactory", "ngAnimate"]);
 
 //copied from
@@ -68,7 +63,6 @@ function FileHelper() {
         request.open("GET", pathOfFileToReadFrom, false);
         request.send(null);
         var returnValue = request.responseText;
-        //console.log('FileHelper read: ' + returnValue.substr(0,50) + ' .....');
         return returnValue;
     }
 }

@@ -48,7 +48,7 @@
                    target="localStorageTab1"
                    toggle="on"
                    ng-click="tab = 1"
-                   active-class="active">Plattform-<br>Tests
+                   active-class="active">platform-<br>tests
                 </a>
 
                 <a class="btn btn-default btn-performanceTests"
@@ -56,7 +56,7 @@
                    target="localStorageTab2"
                    toggle="on"
                    ng-click="tab = 2"
-                   active-class="active">Performance-<br>Tests
+                   active-class="active">performance-<br>tests
                 </a>
 
                 <a class="btn btn-default btn-demonstration"
@@ -64,7 +64,7 @@
                    target="localStorageTab3"
                    toggle="on"
                    ng-click="tab = 3"
-                   active-class="active">Demonstration
+                   active-class="active">demonstration
                 </a>
             </div>
 
@@ -137,10 +137,11 @@
         </div>
 
         <div class="btn-group pull-right" yield-to="navbarAction">
-            <div class="btn btn-navbar">
-                <i class="fa fa-plus"></i> New2
+            <div class="btn btn-navbar" onclick="startAngularJS()">
+                startAngularJS
             </div>
         </div>
+
     </div>
 
     <div class="app-body">
