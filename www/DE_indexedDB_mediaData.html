@@ -2,28 +2,37 @@
 
     <div class="panel">
 
-        <div ng-mediadata-image-selector></div>
+        <h2 class="panel-title">
+            database open?
+        </h2>
 
+        <div class="panel-body">
+            <button class="btn" ng-class="{ 'btn-success' : databaseOpened, 'btn-danger' : !databaseOpened  }"></button>
+
+            <button class="btn btn-primary" ng-click="openDatabase()">open database</button>
+
+        </div>
+
+        <div ng-mediadata-image-selector></div>
         <h2 class="panel-title">
             Actions
         </h2>
 
         <div class="panel-body">
 
+            <a ng-click="saveImage()" class="btn btn-primary"><i class="fa fa-save"></i> save image</a>
+            <a ng-click="deleteImage()" class="btn btn-danger"><i class="fa fa-trash-o"></i> delete image</a>
 
         </div>
+        <h2 class="panel-title">
+            Image loaded from LocalStorage:
+        </h2>
 
-    </div>
+        <div class="panel-body">
+            <img id="imagePlaceholder">
+            <a class="btn btn-default" ng-click="loadImage()"><i class="fa fa-refresh"></i> load</a>
 
-
-    <div ng-mediadata-video-selector></div>
-
-    <h2 class="panel-title">
-        Actions
-    </h2>
-
-    <div class="panel-body">
-
+        </div>
 
     </div>
 </div>

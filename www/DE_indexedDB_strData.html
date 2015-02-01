@@ -17,11 +17,30 @@
             Actions on IndexedDB
         </h2>
 
+
+        <!--<div class="panel-body">-->
+
+        <!--The whole table is stored into a key named "table1_JSON"<br>-->
+        <!--<a class="btn btn-primary" ng-click="saveTable3()"><i-->
+        <!--class="fa fa-save"></i> save</a>-->
+
+        <!--<a class="btn btn-primary" ng-click="loadTable3()"><i-->
+        <!--class="fa fa-refresh"></i>-->
+        <!--load</a>-->
+
+        <!--<a class="btn btn-danger" ng-click="deleteTable3()"><i-->
+        <!--class="fa fa-trash-o"></i> delete</a>-->
+
+        <!--</div>-->
         <div class="panel-body">
 
-            <a ng-class="{disabled: db==null}" class="btn btn-primary" ng-click="saveTableToIndexedDB()">saveTableToIndexedDB</a>
-            <a ng-class="{disabled: db==null}" class="btn btn-primary" ng-click="loadTableFromIndexedDB()">loadTableFromIndexedDB</a>
-            <a ng-class="{disabled: db==null}" class="btn btn-warning"
+            <a ng-class="{disabled: db==null}" class="btn btn-primary" ng-click="saveTable()">
+                <i class="fa fa-save"></i>
+                save</a>
+            <a ng-class="{disabled: db==null}" class="btn btn-primary" ng-click="loadTable()">
+                <i class="fa fa-refresh"></i>
+                load</a>
+            <a ng-class="{disabled: db==null}" class="btn btn-danger"
                ng-click="clearObjectStore()">clearObjectStore</a>
 
         </div>

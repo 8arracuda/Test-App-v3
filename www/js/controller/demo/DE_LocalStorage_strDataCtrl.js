@@ -7,10 +7,9 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
     $scope.saveTable1= function () {
 
         //delete old data first
-        $scope.deleteTable1FromLocalStorage();
+        $scope.deleteTable1();
 
         for (var i = 0; i < $rootScope.numberOfRows; i++) {
-
             localStorage.setItem('table1_' + i + '_id', $rootScope.data[i][0]);
             localStorage.setItem('table1_' + i + '_firstname', $rootScope.data[i][1]);
             localStorage.setItem('table1_' + i + '_lastname', $rootScope.data[i][2]);
@@ -20,7 +19,6 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
             localStorage.setItem('table1_' + i + '_email', $rootScope.data[i][6]);
             localStorage.setItem('table1_' + i + '_randomNumber1', $rootScope.data[i][7]);
             localStorage.setItem('table1_' + i + '_randomNumber2', $rootScope.data[i][8]);
-
         }
 
         localStorage.setItem('table1_numberOfAddresses', $rootScope.numberOfRows);
@@ -50,13 +48,9 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
             address[8] = localStorage.getItem('table1_' + i + '_randomNumber2');
 
             $scope.tableFromLocalStorage.push(address);
-
         }
-
         highlightDestinationTableTitle($scope);
-
     };
-
 
     $scope.deleteTable1= function () {
 
@@ -101,7 +95,7 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
 
     };
 
-    $scope.loadTable2FromLocalStorage = function () {
+    $scope.loadTable2= function () {
 
         $scope.tableFromLocalStorage = [];
 
@@ -119,7 +113,7 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
 
     };
 
-    $scope.deleteTable2FromLocalStorage = function () {
+    $scope.deleteTable2= function () {
 
         var numberOfRows = localStorage.getItem('table1_numberOfAddresses_method2');
 
@@ -137,10 +131,10 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
 
     //Method3: As JSON-String with JSON.stringify
 
-    $scope.saveTable3ToLocalStorage = function () {
+    $scope.saveTable3= function () {
 
         //delete old data first
-        $scope.deleteTable3FromLocalStorage();
+        $scope.deleteTable3();
 
         var tableToSave = [];
         for (var i = 0; i < $rootScope.numberOfRows; i++) {
@@ -155,7 +149,7 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
 
     };
 
-    $scope.loadTable3FromLocalStorage = function () {
+    $scope.loadTable3= function () {
 
         $scope.tableFromLocalStorage = [];
         var tableFromLocalStorage = localStorage.getItem('table1_JSON');
@@ -165,7 +159,7 @@ sdApp.controller('DE_LocalStorage_strDataCtrl', function ($scope, $rootScope) {
 
     };
 
-    $scope.deleteTable3FromLocalStorage = function () {
+    $scope.deleteTable3= function () {
 
         localStorage.removeItem('table1_JSON');
 

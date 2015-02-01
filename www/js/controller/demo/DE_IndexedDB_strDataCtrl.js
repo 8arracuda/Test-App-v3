@@ -1,4 +1,4 @@
-sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope) {
+sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope, IndexedDBClearObjectStore) {
 
         //bool value used for the status-light in the "open database" section
         $scope.databaseOpened = false;
@@ -7,18 +7,8 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope) {
         var objStoreName = "StrData";
 
         $scope.clearObjectStore = function () {
-
-            var request = $scope.db.transaction([objStoreName], "readwrite").objectStore(objStoreName).clear();
-
-            request.onsuccess = function (evt) {
-
-                console.log('objectStore "' + objStoreName + '" has been cleared');
-            };
-            request.onerror = function (event) {
-                console.error("clearObjectStore:", event.target.errorCode);
-                displayActionFailure(this.error);
-            };
-
+            IndexedDBClearObjectStore.clearObjectStore($scope.db, objStoreName, function () {
+            });
         };
 
         $scope.saveTable = function () {
@@ -52,11 +42,11 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope) {
                 console.log('addded ' + $rootScope.numberOfRows + ' addresses to ObjectStore strDaten.');
 
                 transaction.oncomplete = function (event) {
-                    console.log('transaction.oncomplete (in saveTableToIndexedDB)');
+                    console.log('transaction.oncomplete (in saveTable)');
                 };
 
                 transaction.onerror = function (event) {
-                    console.error('transaction.onerror (in saveTableToIndexedDB)');
+                    console.error('transaction.onerror (in saveTable)');
                 };
 
             }
@@ -114,7 +104,6 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope) {
         $scope.openDatabase = function () {
             console.log('openDatabase start');
 
-            //Quelle: https://developer.mozilla.org/de/docs/IndexedDB/IndexedDB_verwenden
             if (!window.indexedDB) {
                 window.alert("Ihr Browser unterstützt keine stabile Version von IndexedDB. Dieses und jenes Feature wird Ihnen nicht zur Verfügung stehen.");
             } else {
@@ -124,7 +113,6 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope) {
                 request.onerror = function (event) {
                     console.error('request.onerror');
                     alert("Database error: " + event.target.errorCode);
-                    // Machen Sie etwas mit request.errorCode!
                 };
                 request.onsuccess = function (event) {
                     console.log('request.onsuccess (in openDatabase)');
@@ -138,10 +126,6 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope) {
                 request.onupgradeneeded = function (event) {
 
                     $scope.db = event.target.result;
-
-                    //on update: when objectStore existed
-                    //before it needs to be deleted, before it's created again with new keys.
-                    //$scope.db.deleteObjectStore(objStoreName);
 
                     var objectStore = $scope.db.createObjectStore(objStoreName, {keyPath: "id"});
 

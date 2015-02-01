@@ -1,4 +1,4 @@
-sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope) {
+sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory) {
 
 
 

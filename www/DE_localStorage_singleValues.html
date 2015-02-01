@@ -73,7 +73,10 @@
                     placeholder="Key"
                     />
             <button class="btn btn-danger" ng-class="{disabled: keyToRemove.length==0}"
-                    ng-click="removeKeyFromLocalStorage()"><i class="fa fa-trash-o"></i> delete key
+                    ng-click="removeKey()"><i class="fa fa-trash-o"></i> delete key
+            </button>
+            <button class="btn btn-danger"
+                    ng-click="clear()">clear LocalStorage
             </button>
 
         </div>

@@ -1,4 +1,4 @@
-sdApp.controller('DE_PG_FileAPI_mediaDataCtrl', function ($scope, $rootScope) {
+sdApp.controller('DE_PG_FileAPI_mediaDataCtrl', function ($scope, $rootScope, ImageHelperFactory) {
 
     $scope.loadImageToCanvas = function () {
 

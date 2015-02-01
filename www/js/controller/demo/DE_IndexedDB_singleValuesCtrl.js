@@ -1,4 +1,4 @@
-sdApp.controller('DE_IndexedDB_singleValuesCtrl', function ($scope) {
+sdApp.controller('DE_IndexedDB_singleValuesCtrl', function ($scope, IndexedDBClearObjectStore) {
 
     var dbName = "Einzelwerte";
     var objStoreName = "Einzelwerte";
@@ -9,8 +9,7 @@ sdApp.controller('DE_IndexedDB_singleValuesCtrl', function ($scope) {
     $scope.keyToLoad = "a";
     $scope.keyToSave = "a";
     $scope.valueToSave = "b";
-    $scope.keyToRemove= "";
-    $scope.db;
+    $scope.keyToRemove = "";
 
     $scope.save = function () {
 
@@ -71,10 +70,8 @@ sdApp.controller('DE_IndexedDB_singleValuesCtrl', function ($scope) {
             $scope.$apply();
         };
 
-
         request.onerror = function (event) {
-            console.error('request.onerror (in updateEinzelwerteView)');
-            // event.target.result == customerData[i].ssn;
+            console.error('request.onerror');
         };
 
     };
@@ -85,53 +82,13 @@ sdApp.controller('DE_IndexedDB_singleValuesCtrl', function ($scope) {
             .objectStore(objStoreName)
             .delete($scope.keyToRemove);
         request.onsuccess = function (event) {
-            // It's gone!
-            alert('key ' + $scope.keyToRemove + ' was removed');
+            console.log('key ' + $scope.keyToRemove + ' was removed');
         };
-
     };
-
-
-    $scope.listObjectStores = function () {
-        console.log('function listObjectStores() called');
-        var request = window.indexedDB.open(dbName, 1);
-
-        request.onerror = function (event) {
-            console.error('request.onerror (in listObjectStores)');
-            alert("Database error: " + event.target.errorCode);
-            // Machen Sie etwas mit request.errorCode!
-        };
-        request.onsuccess = function (event) {
-            console.log('request.onsuccess (in listObjectStores) ');
-            db = request.result;
-
-
-            //$scope.objectStores = $scope.db.objectStoreNames;
-            $scope.$apply();
-
-        };
-
-    };
-
 
     $scope.clearObjectStore = function () {
-
-        var request = $scope.db.transaction([objStoreName], "readwrite").objectStore(objStoreName).clear();
-
-        request.onsuccess = function (evt) {
-
-            console.log('objectStore "' + objStoreName + '" has been cleared');
-        };
-        request.onerror = function (event) {
-            console.error("clearObjectStore:", event.target.errorCode);
-
-
-            //displayActionFailure(this.error);
-        };
-
-        alert('key ' + $scope.keyToRemove + ' was removed');
-
-
+        IndexedDBClearObjectStore.clearObjectStore($scope.db, objStoreName, function () {
+        });
     };
 
     $scope.openDatabase = function () {

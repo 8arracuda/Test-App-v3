@@ -60,7 +60,7 @@
                     placeholder="Key"
                     />
 
-            "{{ keyLoaded }}" {{ valueLoadedFromIndexedDB }}
+            "{{ keyLoaded }}" {{ valueLoadedFromIndexedDB }}<br>
 
             <button ng-class="{disabled: (db==null || keyToLoad.length==0)}" class="btn btn-primary" ng-click="updateView()"><i class="fa fa-refresh"></i> update
             </button>
@@ -85,21 +85,8 @@
             <button ng-class="{disabled: (db==null || keyToRemove.length==0)}" class="btn btn-danger" ng-click="removeKeyFromObjectStore()"><i class="fa fa-trash-o"></i> delete
                 key
             </button>
-            <button ng-class="{disabled: db==null}" class="btn btn-warning" ng-click="clearObjectStore()">clearObjectStore</button>
+            <button ng-class="{disabled: db==null}" class="btn btn-danger" ng-click="clearObjectStore()">clearObjectStore</button>
         </div>
 
-        <h2 class="panel-title">
-            Object Stores
-        </h2>
-
-        <div class="panel-body">
-            <button ng-class="{disabled: db==null}" class="btn btn-default" ng-click="listObjectStores()">listObjectStores</button>
-            <ul>
-                <li ng-repeat="objectStore in objectStores">
-                    {{ objectStore }}
-                </li>
-            </ul>
-
-        </div>
     </div>
 </div>

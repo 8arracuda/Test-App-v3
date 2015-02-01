@@ -33,9 +33,6 @@ sdApp.controller('DE_LocalStorageCtrl', function ($scope, $rootScope) {
     //    $rootScope.toggle('myOverlay', 'on');
     //};
 
-
-
-
     $scope.deleteItem = function (key) {
         var answer = confirm('do you really want to delete key "' + key + '"?')
 

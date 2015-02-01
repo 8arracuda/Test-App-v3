@@ -15,17 +15,12 @@ sdApp.controller('PL_WebSqlCtrl', function ($scope, $rootScope, testDataFactory,
     $scope.prepare = function () {
 
         SQLDatabaseClearTable.clearTable($scope.db, tableName, function () {
-                $scope.prepareInProgress = false;
                 $scope.isPrepared = true;
                 console.log('prepare function finished');
                 $scope.currentIteration = '';
                 $scope.$apply();
             }
         );
-        //clearTable();
-        //$scope.isPrepared = true;
-        //$scope.currentIteration = '';
-        //$scope.$apply();
     };
 
     $scope.startPlatformTest = function () {
