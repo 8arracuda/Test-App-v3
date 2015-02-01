@@ -1,5 +1,6 @@
 sdApp.controller('PL_LocalStorageCtrl', function ($scope, $rootScope, TestHelperFactory, testDataFactory) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PL';
 
     $scope.result = '';
@@ -24,36 +25,26 @@ sdApp.controller('PL_LocalStorageCtrl', function ($scope, $rootScope, TestHelper
         //It will continue until it reaches max quota.
 
         function nextLoop() {
-
             try {
-
                 localStorage.setItem($scope.currentIteration, datasetStringToSave);
 
-                //timeout to allow the UI to update
-                //setTimeout(
-                  //  function () {
-                        //to update the UI - gives the user an update about the progress as the test progresses
-                        $scope.currentIteration = (parseInt($scope.currentIteration) + 1);
-                        $scope.$apply();
-                        setTimeout(
-                            nextLoop(), 500);
-                    //}, 500);
+                $scope.currentIteration = (parseInt($scope.currentIteration) + 1);
+                $scope.$apply();
+                setTimeout(
+                    nextLoop(), 500);
 
             } catch (e) {
                 if (e.name === 'QuotaExceededError') {
-                    //console.log('error is QuotaExceededError');
-                    $scope.result = { description: 'QuotaExceededError', exceptionInIteration: $scope.currentIteration};
+                    $scope.result = {description: 'QuotaExceededError', exceptionInIteration: $scope.currentIteration};
                     $scope.testInProgress = false;
                     $scope.$apply();
                 }
-
             }
-
-        };
+        }
 
         //start the test
-
         var datasetStringToSave = JSON.stringify(testDataFactory.getDatasetForPlatformTest());
+        console.log(datasetStringToSave);
         $scope.testInProgress = true;
         $scope.$apply();
 

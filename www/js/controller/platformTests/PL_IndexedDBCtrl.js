@@ -1,5 +1,6 @@
 sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFactory, IndexedDBClearObjectStore, TestHelperFactory) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PL';
 
     var dbName = "PL_Test1";

@@ -48,16 +48,14 @@ sdApp.controller('PE_FileAPI_TestR3Ctrl', function ($scope, $rootScope, testData
 
         $scope.prepareInProgress = true;
         $scope.$apply();
-        deleteAllFiles = FileApiDeleteAllFilesFactory.deleteAllFiles(function () {
+        FileApiDeleteAllFilesFactory.deleteAllFiles(function () {
             saveAddressData(function () {
                 $scope.isPrepared = true;
                 $scope.prepareInProgress = false;
                 console.log('prepare function finished');
                 $scope.$apply();
             });
-
         });
-
     };
 
 

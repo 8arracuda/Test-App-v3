@@ -1,6 +1,4 @@
-sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
-
-    //var fs;
+sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAllFilesFactory) {
 
     $rootScope.section = 'DE';
     $scope.loadingInProgress = false;
@@ -8,7 +6,7 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
 
     //<für alle Tabs>
     $scope.stringForRightButton = 'show files';
-    $scope.stringForTitle = 'File API-Plugin';
+    $scope.stringForTitle = 'File Plugin';
     $scope.functionForRightButton = function () {
         $rootScope.toggle('myOverlay', 'on');
         showFiles();
@@ -30,12 +28,6 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
     $scope.enableTab_singleValues();
 
     //Functions for the Overlay
-
-    //TODO For debugging in Chrome (remove at the end)
-    if (!navigator.userAgent == userAgentForDesktopDevelopment1 || !navigator.userAgent == userAgentForDesktopDevelopment2) {
-        $scope.documentsDirectory = cordova.file.documentsDirectory;
-    }
-
     $scope.reloadFileList = function () {
         showFiles();
     };
@@ -72,8 +64,6 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
 
         }
 
-
-        console.log('before');
         window.requestFileSystem(window.PERSISTENT, 1024 * 1024,
             function (fs) {
 
@@ -95,9 +85,8 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
                 readEntries(); // Start reading dirs.
 
             }, errorHandler);
-        console.log('after');
 
-    };
+    }
 
     $scope.loadFileContent = function (index) {
         var filename = $scope.filelist[index].name;
@@ -121,10 +110,9 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
                 }, errorHandler);
 
             }, errorHandler);
-        };
+        }
 
         window.requestFileSystem(window.PERSISTENT, 1024 * 1024, getFileContent, errorHandler);
-
 
     };
 
@@ -134,7 +122,7 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
             alert('Deletion of directories is not implemented.');
         } else {
 
-            answer = confirm('do you really want to delete key "' + filename + '"?');
+            var answer = confirm('do you really want to delete key "' + filename + '"?');
 
             if (answer == true) {
                 window.requestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
@@ -160,32 +148,12 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
         var answer = confirm('do you really want to delete all files? (Note that directories will not be deleted.)');
 
         if (answer == true) {
-            window.requestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
 
-                    for (var i = 0; i < $scope.filelist.length; i++) {
-
-                        //continue if it's not a directory
-                        var filename = $scope.filelist[i].name;
-                        if (filename.indexOf('[DIR]') == -1) {
-
-                            fs.root.getFile(filename, {create: false}, function (fileEntry) {
-
-                                fileEntry.remove(function () {
-                                    console.log(filename + ' has been removed.');
-
-                                }, errorHandler);
-
-                            }, errorHandler);
-                        }
-                    }
-                    $scope.inProgress = false;
-                    $scope.$apply();
-                    $scope.reloadFileList();
-
-                },
-                errorHandler
-            )
-            ;
+            FileApiDeleteAllFilesFactory.deleteAllFiles(function () {
+                $scope.inProgress = false;
+                $scope.$apply();
+                $scope.reloadFileList();
+            });
         }
 
     };
@@ -214,7 +182,7 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope) {
                 msg = 'Unknown Error';
                 break;
         }
-        ;
+
 
         console.log('Error: ' + msg);
     }

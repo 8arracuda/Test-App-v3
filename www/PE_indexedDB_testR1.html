@@ -39,10 +39,23 @@
                 Start test
             </h2>
 
+            <!--<div class="panel-body">-->
+
+                <!--<div ng-start-performance-test-button-with-database></div>-->
+
+            <!--</div>-->
+
+
             <div class="panel-body">
 
-                <div ng-start-performance-test-button-with-database></div>
+                <!--<div ng-start-performance-test-button-with-database></div>-->
+                <button ng-class="{disabled: !isPrepared || testInProgress || !databaseOpened }" ng-click="startPerformanceTest1()" class="btn btn-primary">
+                    start test1
+                </button>
 
+                <button ng-class="{disabled: !isPrepared || testInProgress || !databaseOpened }" ng-click="startPerformanceTest2()" class="btn btn-primary">
+                    start test2
+                </button>
             </div>
 
             <div ng-results-for-performance-tests></div>

@@ -1,5 +1,6 @@
 sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAllFilesFactory, testDataFactory, TestHelperFactory) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PL';
 
     $scope.result = '';
@@ -9,8 +10,7 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
     $scope.prepare = function () {
         $scope.prepareInProgress = true;
         $scope.$apply();
-        deleteAllFiles = FileApiDeleteAllFilesFactory.deleteAllFiles(function () {
-
+        FileApiDeleteAllFilesFactory.deleteAllFiles(function () {
             $scope.isPrepared = true;
             $scope.prepareInProgress = false;
             $scope.$apply();
@@ -92,7 +92,7 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
                 break;
 
         }
-        ;
+
         alert('error!');
 
         console.log('Error: ' + msg);

@@ -28,7 +28,7 @@ sdApp.controller('PE_IndexedDB_TestR1Ctrl', function ($scope, $rootScope, testDa
 
         dataForPreparation = testDataFactory.testData();
 
-    };
+    }
 
     $scope.selectTestVariant = function (testVariant) {
         $scope.selectedTestVariant = testVariant;
@@ -154,8 +154,47 @@ sdApp.controller('PE_IndexedDB_TestR1Ctrl', function ($scope, $rootScope, testDa
 
     };
 
+    ////get addresses in a loop
+    //$scope.startPerformanceTest = function () {
+    //
+    //    $scope.testInProgress = true;
+    //
+    //    var timeStart = new Date().getTime();
+    //    var transaction = $scope.db.transaction([objStoreName], "readonly");
+    //    var objectStore = transaction.objectStore(objStoreName);
+    //
+    //    for (var i = 0; i < amountOfData; i++) {
+    //        objectStore.get(i);
+    //
+    //        var idbRequest = objectStore.get(i);
+    //        idbRequest.onsuccess = function (event) {
+    //            /*
+    //             console.dir(event.target.result);
+    //             */
+    //        };
+    //
+    //    }
+    //
+    //    transaction.oncomplete = function (event) {
+    //
+    //        var timeEnd = new Date().getTime();
+    //        var timeDiff = timeEnd - timeStart;
+    //
+    //        $scope.results.push({iteration: iteration, time: timeDiff});
+    //        iteration++;
+    //        $scope.testInProgress = false;
+    //        $scope.$apply();
+    //
+    //    };
+    //
+    //    transaction.onerror = function (event) {
+    //        console.error('transaction.onerror (in startPerformanceTest_onlyOne)');
+    //        $scope.testInProgress = false;
+    //    };
+    //};
+
     //get addresses in a loop
-    $scope.startPerformanceTest = function () {
+    $scope.startPerformanceTest1 = function () {
 
         $scope.testInProgress = true;
 
@@ -165,6 +204,7 @@ sdApp.controller('PE_IndexedDB_TestR1Ctrl', function ($scope, $rootScope, testDa
 
         for (var i = 0; i < amountOfData; i++) {
             objectStore.get(i);
+
 
             var idbRequest = objectStore.get(i);
             idbRequest.onsuccess = function (event) {
@@ -177,6 +217,42 @@ sdApp.controller('PE_IndexedDB_TestR1Ctrl', function ($scope, $rootScope, testDa
 
         transaction.oncomplete = function (event) {
 
+            var timeEnd = new Date().getTime();
+            var timeDiff = timeEnd - timeStart;
+
+            $scope.results.push({iteration: iteration, time: timeDiff});
+            iteration++;
+            $scope.testInProgress = false;
+            $scope.$apply();
+
+        };
+
+        transaction.onerror = function (event) {
+            console.error('transaction.onerror (in startPerformanceTest_onlyOne)');
+            $scope.testInProgress = false;
+        };
+    };
+
+    //get via an cursor
+    $scope.startPerformanceTest2 = function () {
+
+        $scope.testInProgress = true;
+
+        var timeStart = new Date().getTime();
+        var transaction = $scope.db.transaction([objStoreName], "readonly");
+        var objectStore = transaction.objectStore(objStoreName);
+
+        objectStore.openCursor().onsuccess = function(event) {
+
+            var cursor = event.target.result;
+            if(cursor) {
+                //console.log(JSON.stringify(cursor.key));
+                //console.log(JSON.stringify(cursor.value));
+                cursor.continue();
+            }
+        };
+
+        transaction.oncomplete = function (event) {
             var timeEnd = new Date().getTime();
             var timeDiff = timeEnd - timeStart;
 

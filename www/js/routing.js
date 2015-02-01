@@ -17,7 +17,7 @@ sdApp.config(function ($routeProvider) {
             templateUrl: 'PL_indexedDB.html',
             controller: 'PL_IndexedDBCtrl'
         }).
-        when('/PL_fileAPI', {
+        when('/PL_filePlugin', {
             templateUrl: 'PL_fileAPI.html',
             controller: 'PL_FileAPICtrl'
         }).
@@ -41,7 +41,7 @@ sdApp.config(function ($routeProvider) {
             templateUrl: 'PE_webSql.html',
             controller: 'PE_WebSqlCtrl'
         }).
-        when('/PE_fileAPI', {
+        when('/PE_filePlugin', {
             templateUrl: 'PE_fileAPI.html',
             controller: 'PE_FileAPICtrl'
         }).
@@ -65,60 +65,36 @@ sdApp.config(function ($routeProvider) {
             templateUrl: 'DE_webSql.html',
             controller: 'DE_WebSqlCtrl'
         }).
-        when('/DE_PG_fileAPI', {
+        when('/DE_filePlugin', {
             templateUrl: 'DE_PG_fileAPI.html',
             controller: 'DE_PG_FileAPICtrl'
-        }).
-        when('/DE_PGSQLite', {
-            templateUrl: 'DE_PG_SQLite.html',
-            controller: 'DE_PGSQLiteCtrl'
         }).
         when('/localStorage/list2/:key', {
             templateUrl: 'localStorage_list2_details.html',
             controller: 'LocalStorageList2DetailsCtrl'
         }).
-        when('/sessionStorage', {
-            templateUrl: 'sessionStorage.html',
-            controller: 'SessionStorageCtrl'
-        }).
-        when('/indexedDB', {
-            templateUrl: 'indexedDB.html',
-            controller: 'IndexedDBCtrl'
-        }).
-        when('/webSql', {
-            templateUrl: 'webSql.html',
-            controller: 'WebSqlCtrl'
-        }).
-        when('/PGSQLite', {
-            templateUrl: 'PG_SQLite.html',
-            controller: 'PGSQLiteCtrl'
-        }).
-        when('/acc', {
-            templateUrl: 'acc.html',
-            controller: 'AccCtrl'
-        }).
-        when('/cam', {
-            templateUrl: 'cam.html',
-            controller: 'CamCtrl'
-        }).
-        when('/vid', {
-            templateUrl: 'vid.html',
-            controller: 'VidCtrl'
-        }).
-        when('/loadImage', {
-            templateUrl: 'loadImage.html',
-            controller: 'LoadImageCtrl'
-        }).
-        when('/devOrientation', {
-            templateUrl: 'devOrientation.html',
-            controller: 'DevOrientationCtrl'
-        }).
+        //when('/sessionStorage', {
+        //    templateUrl: 'sessionStorage.html',
+        //    controller: 'SessionStorageCtrl'
+        //}).
+        //when('/indexedDB', {
+        //    templateUrl: 'indexedDB.html',
+        //    controller: 'IndexedDBCtrl'
+        //}).
+        //when('/webSql', {
+        //    templateUrl: 'webSql.html',
+        //    controller: 'WebSqlCtrl'
+        //}).
+        //when('/PGSQLite', {
+        //    templateUrl: 'PG_SQLite.html',
+        //    controller: 'PGSQLiteCtrl'
+        //}).
         when('/directoryVariables', {
             templateUrl: 'directoryVariables.html',
             controller: 'DirectoryVariablesCtrl'
         }).
         otherwise({
             redirectTo: '/PE_localStorage'
-            //redirectTo: '/PE_fileAPI'
+            //redirectTo: '/PE_filePlugin'
         });
 });

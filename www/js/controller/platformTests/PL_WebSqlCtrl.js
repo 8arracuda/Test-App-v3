@@ -1,5 +1,6 @@
-sdApp.controller('PL_WebSqlCtrl', function ($scope, $rootScope, testDataFactory, TestHelperFactory) {
+sdApp.controller('PL_WebSqlCtrl', function ($scope, $rootScope, testDataFactory, TestHelperFactory, SQLDatabaseClearTable) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PL';
 
     var tableName;
@@ -7,21 +8,25 @@ sdApp.controller('PL_WebSqlCtrl', function ($scope, $rootScope, testDataFactory,
     var dbVersion;
     var dbSize;
 
-
     $scope.result = '';
     $scope.isPrepared = false;
     $scope.testInProgress = false;
 
-    var keyPrefix;
-    var value;
-
     $scope.prepare = function () {
-        clearTable();
-        $scope.isPrepared = true;
-        $scope.currentIteration = '';
-        $scope.$apply();
-    };
 
+        SQLDatabaseClearTable.clearTable($scope.db, tableName, function () {
+                $scope.prepareInProgress = false;
+                $scope.isPrepared = true;
+                console.log('prepare function finished');
+                $scope.currentIteration = '';
+                $scope.$apply();
+            }
+        );
+        //clearTable();
+        //$scope.isPrepared = true;
+        //$scope.currentIteration = '';
+        //$scope.$apply();
+    };
 
     $scope.startPlatformTest = function () {
         console.log('startPlatformTest');
@@ -37,7 +42,6 @@ sdApp.controller('PL_WebSqlCtrl', function ($scope, $rootScope, testDataFactory,
             $scope.db.transaction(function (tx) {
 
                     for (var i = 0; i < 5; i++) {
-
 
                         var datasetName = 'dataset_' + $scope.currentIteration;
 
@@ -81,21 +85,6 @@ sdApp.controller('PL_WebSqlCtrl', function ($scope, $rootScope, testDataFactory,
             nextTransactions();
         }, 500);
     };
-
-
-    function clearTable() {
-
-        $scope.db.transaction(function (tx) {
-            tx.executeSql("DELETE FROM " + tableName, [], clearedTableCallback, $scope.errorHandlerWebSQL);
-        });
-
-        function clearedTableCallback(transaction, results) {
-            console.log('Table ' + tableName + ' has been cleared');
-            $scope.isPrepared = true;
-            $scope.$apply();
-
-        }
-    }
 
     $scope.initWebSQL = function (variant) {
 

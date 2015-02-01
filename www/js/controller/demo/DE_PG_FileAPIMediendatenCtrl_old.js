@@ -36,7 +36,7 @@ sdApp.controller('DE_PG_FileAPIMediendatenCtrl', function ($scope, $rootScope) {
 
 
         console.log('will save image: ' + imageFilename);
-    }
+    };
 
 
     $scope.saveTable2ToPGFileAPI = function () {
@@ -130,7 +130,7 @@ sdApp.controller('DE_PG_FileAPIMediendatenCtrl', function ($scope, $rootScope) {
                 msg = 'Unknown Error';
                 break;
         }
-        ;
+
 
         console.log('Error: ' + msg);
     }

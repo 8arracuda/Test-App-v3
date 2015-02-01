@@ -1,5 +1,6 @@
 sdApp.controller('PL_PGSQLiteCtrl', function ($scope, $rootScope, testDataFactory, TestHelperFactory) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PL';
 
     var tableName = 'PL_WebSQL';

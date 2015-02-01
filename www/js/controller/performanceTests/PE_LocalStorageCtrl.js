@@ -1,5 +1,6 @@
 sdApp.controller('PE_LocalStorageCtrl', function ($scope, $rootScope) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PE';
 
     $scope.localStorage = localStorage;

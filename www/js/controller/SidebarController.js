@@ -21,14 +21,14 @@ sdApp.controller('SidebarController', function ($scope, techSupportFactory) {
             support: ts.localStorage
         },
         {
-            labelText: 'WebSQL',
-            linkURL: 'PE_webSql',
-            support: ts.webSQL
-        },
-        {
             labelText: 'IndexedDB',
             linkURL: 'PE_indexedDB',
             support: ts.indexedDB
+        },
+        {
+            labelText: 'WebSQL',
+            linkURL: 'PE_webSql',
+            support: ts.webSQL
         },
         {
             labelText: 'SQLite Plugin',
@@ -37,8 +37,8 @@ sdApp.controller('SidebarController', function ($scope, techSupportFactory) {
         },
 
         {
-            labelText: 'File API',
-            linkURL: 'PE_fileAPI',
+            labelText: 'File Plugin',
+            linkURL: 'PE_filePlugin',
             support: ts.fileAPI_fullSupport
         }
     ];
@@ -53,14 +53,14 @@ sdApp.controller('SidebarController', function ($scope, techSupportFactory) {
             support: ts.localStorage
         },
         {
-            labelText: 'WebSQL',
-            linkURL: 'PL_webSQL',
-            support: ts.webSQL
-        },
-        {
             labelText: 'IndexedDB',
             linkURL: 'PL_indexedDB',
             support: ts.indexedDB
+        },
+        {
+            labelText: 'WebSQL',
+            linkURL: 'PL_webSQL',
+            support: ts.webSQL
         },
         {
             labelText: 'SQLite Plugin',
@@ -68,27 +68,17 @@ sdApp.controller('SidebarController', function ($scope, techSupportFactory) {
             support: ts.sqlitePlugin
         },
         {
-            labelText: 'File API',
-            linkURL: 'PL_fileAPI',
+            labelText: 'File Plugin',
+            linkURL: 'PL_filePlugin',
             support: ts.fileAPI_fullSupport
         }
     ];
 
     $scope.sidebar_demonstration = [
         {
-            labelText: 'SessionStorage',
-            linkURL: 'DE_sessionStorage',
-            support: ts.sessionStorage
-        },
-        {
             labelText: 'LocalStorage',
             linkURL: 'DE_localStorage',
             support: ts.localStorage
-        },
-        {
-            labelText: 'WebSQL',
-            linkURL: 'DE_webSql',
-            support: ts.webSQL
         },
         {
             labelText: 'IndexedDB',
@@ -96,13 +86,13 @@ sdApp.controller('SidebarController', function ($scope, techSupportFactory) {
             support: ts.indexedDB
         },
         {
-            labelText: 'SQLite Plugin',
-            linkURL: 'DE_PGSQLite',
-            support: ts.sqlitePlugin
+            labelText: 'WebSQL',
+            linkURL: 'DE_webSql',
+            support: ts.webSQL
         },
         {
-            labelText: 'File API',
-            linkURL: 'DE_PG_fileAPI',
+            labelText: 'File Plugin',
+            linkURL: 'DE_filePlugin',
             support: ts.fileAPI_fullSupport
         }
     ];

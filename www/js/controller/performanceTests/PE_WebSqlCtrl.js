@@ -1,5 +1,6 @@
 sdApp.controller('PE_WebSqlCtrl', function ($scope, $rootScope) {
 
+    //for setting up the color of the titlebar
     $rootScope.section = 'PE';
 
     //<für alle Tabs>
