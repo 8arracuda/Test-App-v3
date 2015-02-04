@@ -6,7 +6,7 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
     var filenameForMethod1NumberOfRows = 'table1_numberOfRows.txt';
     var filenameForMethod2 = 'table2.txt';
 
-    $scope.saveTable1= function () {
+    $scope.saveTable1 = function () {
 
         //TODO Problem with removing the old data
         //delete files before saving new ones
@@ -78,132 +78,7 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
 
     };
 
-    //TODO Highlighting is missing
-
-    $scope.loadTable1= function () {
-
-        $scope.tableFromPGFileAPI = [];
-        var numberOfRows;
-
-        window.requestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
-
-                //read NumberOfRows
-                fs.root.getFile(filenameForMethod1NumberOfRows, {}, function (fileEntry) {
-
-                    // Get a File object representing the file,
-                    // then use FileReader to read its contents.
-                    fileEntry.file(function (file) {
-                        var reader = new FileReader();
-
-                        reader.onloadend = function (e) {
-
-                            numberOfRows = this.result;
-
-                            alert('numberOfRows:' + numberOfRows + ' - starting loop');
-
-                            //after reading numberOfRows the address-files get loaded
-                            for (var i = 0; i < numberOfRows; i++) {
-
-                                var filename = filenameForMethod1 + '_' + i + '.txt';
-
-                                fs.root.getFile(filename, {}, function (fileEntry) {
-
-                                    // Get a File object representing the file,
-                                    // then use FileReader to read its contents.
-                                    fileEntry.file(function (file) {
-                                        var reader = new FileReader();
-
-                                        reader.onloadend = function (e) {
-                                            console.log('numberOfRows=' + numberOfRows);
-
-                                            if (i == 0) {
-                                                alert(this.result);
-                                            }
-
-                                            var address = JSON.parse(this.result);
-
-                                            $scope.tableFromPGFileAPI.push(address);
-                                            $scope.$apply();
-                                        };
-
-                                        reader.readAsText(file);
-                                    }, errorHandler);
-
-                                }, errorHandler);
-
-                            }
-
-                        };
-
-                        reader.readAsText(file);
-                    }, errorHandler);
-
-                }, errorHandler2);
-            },
-            errorHandler
-        );
-
-    };
-
-    $scope.deleteTable1= function () {
-        var filename = filenameForMethod2;
-        //$scope.inProgress = true;
-
-        console.log('deleteTable1FromPGFileAPI');
-        window.requestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
-
-            var numberOfRows;
-
-            window.requestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
-
-                    function deleteFile(filename) {
-
-                        fs.root.getFile(filename, {create: false}, function (fileEntry) {
-                            fileEntry.remove(function () {
-                                console.log(filename + ' has been removed.');
-                            }, errorHandler);
-                        }, errorHandler);
-
-                    };
-
-                    //read NumberOfRows
-                    fs.root.getFile(filenameForMethod1NumberOfRows, {}, function (fileEntry) {
-
-                        // Get a File object representing the file,
-                        // then use FileReader to read its contents.
-                        fileEntry.file(function (file) {
-                            var reader = new FileReader();
-
-                            reader.onloadend = function (e) {
-
-                                var numberOfRows = this.result;
-
-                                //alert('numberOfRows:' + numberOfRows);
-                                console.log('numberOfRows: ' + numberOfRows + '(from deleteTable1FromPGFileAPI)');
-
-                                for (var i = 0; i < numberOfRows; i++) {
-                                    var filename = filenameForMethod1 + '_' + i + '.txt';
-                                    deleteFile(filename);
-                                }
-
-                                //delete numberOfRows file
-                                deleteFile(filenameForMethod1NumberOfRows);
-
-                            };
-
-                            reader.readAsText(file);
-                        }, errorHandler);
-
-
-                    }, errorHandler2);
-                },
-                errorHandler
-            );
-        }, errorHandler);
-    };
-
-
-    $scope.saveTable2= function () {
+    $scope.saveTable = function () {
 
         window.requestFileSystem(window.PERSISTENT, 1024 * 1024,
             function (fs) {
@@ -216,10 +91,9 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
 
                         fileWriter.onwriteend = function (e) {
                             console.log('Write completed.');
-                            //alert('filename:' + fileEntry.name + " url:" + fileEntry.toURL());
+
                             console.log('filename:' + fileEntry.name + " url:" + fileEntry.toURL() + '(from saveTable2ToPGFileAPI)');
-                            //$scope.inProgress = false;
-                            //$scope.$apply();
+
                         };
 
                         fileWriter.onerror = function (e) {
@@ -238,20 +112,16 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
                         fileWriter.seek(0);
                         fileWriter.write(JSON.stringify(tableToSave));
 
-                        alert('table with ' + $rootScope.numberOfRows + ' has been saved.');
-
                     }, errorHandler);
 
                 }, errorHandler);
-
             },
             errorHandler
         );
-
     };
 
 
-    $scope.loadTable2= function () {
+    $scope.loadTable = function () {
 
         $scope.tableFromPGFileAPI = [];
 
@@ -289,7 +159,7 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
 
     };
 
-    $scope.deleteTable2= function () {
+    $scope.deleteTable = function () {
         var filename = filenameForMethod2;
         //$scope.inProgress = true;
 
@@ -335,6 +205,7 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
                 break;
         }
         ;
+
 
         console.log('Error: ' + msg);
     }

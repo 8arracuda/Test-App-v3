@@ -205,7 +205,6 @@ sdApp.controller('PE_IndexedDB_TestR1Ctrl', function ($scope, $rootScope, testDa
         for (var i = 0; i < amountOfData; i++) {
             objectStore.get(i);
 
-
             var idbRequest = objectStore.get(i);
             idbRequest.onsuccess = function (event) {
                 /*

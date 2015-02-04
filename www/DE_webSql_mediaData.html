@@ -2,14 +2,25 @@
 
     <div class="panel">
 
+        <!--<h2 class="panel-title">-->
+            <!--database connection-->
+        <!--</h2>-->
+
+        <!--<div class="panel-body">-->
+            <!--<button class="disabled btn"-->
+                    <!--ng-class="{ 'btn-success' : databaseOpened, 'btn-danger' : !databaseOpened  }"></button>-->
+            <!--<button class="btn btn-primary" ng-click="initWebSQL()">init/open database</button>-->
+        <!--</div>-->
+
         <h2 class="panel-title">
-            database connection
+            database open?
         </h2>
 
         <div class="panel-body">
-            <button class="disabled btn"
-                    ng-class="{ 'btn-success' : databaseOpened, 'btn-danger' : !databaseOpened  }"></button>
-            <button class="btn btn-primary" ng-click="initWebSQL()">init/open database</button>
+            <button class="btn" ng-class="{ 'btn-success' : databaseOpened, 'btn-danger' : !databaseOpened  }"></button>
+
+            <button class="btn btn-primary" ng-click="openDatabase()">open database</button>
+
         </div>
 
         <div ng-mediadata-image-selector></div>
@@ -19,6 +30,18 @@
         </h2>
 
         <div class="panel-body">
+
+            <a ng-click="saveImage()" class="btn btn-primary"><i class="fa fa-save"></i> save image</a>
+            <a ng-click="deleteImage()" class="btn btn-danger"><i class="fa fa-trash-o"></i> delete image</a>
+
+        </div>
+        <h2 class="panel-title">
+            Image loaded:
+        </h2>
+
+        <div class="panel-body">
+            <img id="imagePlaceholder">
+            <a class="btn btn-default" ng-click="loadImage()"><i class="fa fa-refresh"></i> load</a>
 
         </div>
 

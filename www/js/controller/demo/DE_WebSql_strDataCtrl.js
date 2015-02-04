@@ -1,4 +1,4 @@
-sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope) {
+sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope, SQLDatabaseClearTable) {
 
     //bool value used for the status-light in the "open database" section
     $scope.databaseOpened = false;
@@ -6,27 +6,21 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope) {
     const dbName = "strData";
     const dbVersion = "1.0";
     const tableName = "strData";
-    //TODO Change 3rd Parameter in openDatabase to databaseDescription
 
+    $scope.openDatabase = function () {
 
-    $scope.initWebSQL = function () {
-        console.log('initWebSQL start');
         $scope.db = window.openDatabase(dbName, dbVersion, dbName, 2 * 1024 * 1024);
-        //$scope.db.transaction($scope.setupWebSQL, $scope.errorHandlerWebSQL, $scope.dbReadyWebSQL);
         $scope.db.transaction($scope.createTableStrData, $scope.errorHandlerWebSQL);
-        console.log('initWebSQL executed');
         $scope.databaseOpened = true;
     };
 
     $scope.createTableStrData = function (tx) {
-        console.log('createTableStrDaten start');
+
         tx.executeSql('CREATE TABLE IF NOT EXISTS ' + tableName + '(id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, street TEXT, zipcode TEXT, city TEXT, email TEXT, randomNumber1 INTEGER, randomNumber2 INTEGER)');
-        console.log('createTableStrDaten executed');
     };
 
     $scope.errorHandlerWebSQL = function (e) {
         console.log('errorHandlerWebSQL start');
-        //alert(e.message);
         console.log(e.message);
         console.log('errorHandlerWebSQL executed');
     };
@@ -77,27 +71,26 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope) {
 
     $scope.saveTable1ToWebSQL = function () {
 
-        $scope.clearTable();
+        SQLDatabaseClearTable.clearTable($scope.db, tableName, function () {
 
-        console.log('saveTable1ToWebSQL start');
-        //i = 0;
-        //alert(JSON.stringify($rootScope.data[i]));
+            console.log('saveTable1ToWebSQL start');
 
-        $scope.db.transaction(function (tx) {
-            //tx.executeSql("INSERT INTO strDaten(firstName, lastName, street, city, zipcode, email) VALUES(?,?,?,?,?)", [$rootScope.data[i][0], $rootScope.data[i][1], $rootScope.data[i][2], $rootScope.data[i][3], $rootScope.data[i][4], $rootScope.data[i][5] ]);
+            $scope.db.transaction(function (tx) {
 
-            for (var i = 0; i < $rootScope.numberOfRows; i++) {
-                tx.executeSql("INSERT INTO strDaten(id, firstName, lastName, street, zipcode, city, email, randomNumber1, randomNumber2) VALUES(?,?,?,?,?,?,?,?,?)", [$rootScope.data[i][0], $rootScope.data[i][1], $rootScope.data[i][2], $rootScope.data[i][3], $rootScope.data[i][4], $rootScope.data[i][5], $rootScope.data[i][6], $rootScope.data[i][7], $rootScope.data[i][8]]);
-            }
+                for (var i = 0; i < $rootScope.numberOfRows; i++) {
+                    tx.executeSql("INSERT INTO strDaten(id, firstName, lastName, street, zipcode, city, email, randomNumber1, randomNumber2) VALUES(?,?,?,?,?,?,?,?,?)", [$rootScope.data[i][0], $rootScope.data[i][1], $rootScope.data[i][2], $rootScope.data[i][3], $rootScope.data[i][4], $rootScope.data[i][5], $rootScope.data[i][6], $rootScope.data[i][7], $rootScope.data[i][8]]);
+                }
 
-            alert($rootScope.numberOfRows + ' addresses saved in WebSQL database  -' + tableName + '-?');
-            //}, $scope.fooErrorHandler);
-        }, function errorHandler(transaction, error) {
-            alert("Error : " + transaction.message);
-            alert("Error : " + error.message);
+                alert($rootScope.numberOfRows + ' addresses saved in WebSQL database  -' + tableName + '-?');
+
+            }, function errorHandler(transaction, error) {
+                alert("Error : " + transaction.message);
+                alert("Error : " + error.message);
+            });
+
+            console.log('saveTable1ToWebSQL executed');
+
         });
-
-        console.log('saveTable1ToWebSQL executed');
 
 
     };
@@ -118,21 +111,21 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope) {
     //    });
     //};
 
-    $scope.clearTable = function () {
+    //$scope.clearTable = function () {
+    //
+    //    //var answer = confirm('Do you really want to remove all entries from the database -strDaten-?');
+    //
+    //
+    //    $scope.db.transaction(function (tx) {
+    //        tx.executeSql("DELETE FROM strDaten", [], clearedTableCallback, $scope.errorHandlerWebSQL);
+    //    });
+    //    // $scope.$apply();
+    //
+    //
+    //};
 
-        //var answer = confirm('Do you really want to remove all entries from the database -strDaten-?');
-
-
-        $scope.db.transaction(function (tx) {
-            tx.executeSql("DELETE FROM strDaten", [], clearedTableCallback, $scope.errorHandlerWebSQL);
-        });
-        // $scope.$apply();
-
-
-    };
-
-    function clearedTableCallback(transaction, results) {
-        console.log('Table ' + tableName + ' has been cleared');
-    }
+    //function clearedTableCallback(transaction, results) {
+    //    console.log('Table ' + tableName + ' has been cleared');
+    //}
 
 });
