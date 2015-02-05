@@ -66,13 +66,10 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
                             }, errorHandler);
 
                         }, errorHandler);
-
                 }
-
             },
             errorHandler
         );
-
     };
 
 

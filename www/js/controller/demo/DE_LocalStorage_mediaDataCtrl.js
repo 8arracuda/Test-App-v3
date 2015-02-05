@@ -18,6 +18,6 @@ sdApp.controller('DE_LocalStorage_mediaDataCtrl', function ($scope, $rootScope, 
     };
 
     //load image from localStorage when page is loaded
-    $scope.loadImageFromLocalStorage();
+    $scope.loadImage();
 
 });
