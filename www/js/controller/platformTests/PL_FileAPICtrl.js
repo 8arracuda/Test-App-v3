@@ -23,7 +23,8 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
         window.requestFileSystem(window.PERSISTENT, 1024 * 1024,
             function (fs) {
 
-                var i = 0;
+                //var i = 0;
+                $scope.currentIteration = 0;
 
                 $scope.testInProgress = true;
                 $scope.$apply();
@@ -31,8 +32,7 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
                 var datasetStringToSave = testDataFactory.getDatasetForPlatformTest();
                 function writeFile() {
 
-
-                        var filename = i + '.txt';
+                        var filename = parseInt($scope.currentIteration) + '.txt';
                         fs.root.getFile(filename, {create: true}, function (fileEntry) {
 
                             fileEntry.createWriter(function (fileWriter) {
@@ -40,8 +40,17 @@ sdApp.controller('PL_FileAPICtrl', function ($scope, $rootScope, FileApiDeleteAl
                                 fileWriter.onwriteend = function (e) {
 
                                     //after one file has been successfully written the next file can be written
-                                    i++;
-                                    writeFile();
+                                    $scope.currentIteration=$scope.currentIteration+1;
+                                    //writeFile();
+
+                                    if ((parseInt($scope.currentIteration) % 100) == 0) {
+                                        $scope.$apply();
+                                        setTimeout(function () {
+                                            writeFile();
+                                        }, 1000);
+                                    } else {
+                                        writeFile();
+                                    }
                                 };
 
                                 fileWriter.onerror = function (e) {

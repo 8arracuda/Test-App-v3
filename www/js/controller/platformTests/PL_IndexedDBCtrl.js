@@ -80,14 +80,12 @@ sdApp.controller('PL_IndexedDBCtrl', function ($scope, $rootScope, testDataFacto
 
         function writeNext() {
 
-            //console.log('nextLoop' + $scope.currentIteration);
             transaction = $scope.db.transaction([objStoreName], "readwrite");
-            //console.log('nextLoop-1');
+
             var objectStore = transaction.objectStore(objStoreName);
-            //console.log('nextLoop-2');
+
             objectStore.add(datasetStringToSave, 'dataset_' + $scope.currentIteration);
-            //console.log('nextLoop-3');
-            //$scope.currentIteration = $scope.currentIteration + 1;
+
             $scope.currentIteration += 1;
             //console.log('nextLoop-4');
 
