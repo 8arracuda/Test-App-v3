@@ -3,8 +3,7 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
     //bool value used for the status-light in the "open database" section
     $scope.databaseOpened = false;
 
-    var tableName = "MediaData";
-    var dbName = "MediaData";
+    var dbName = "mediaData";
     var dbVersion = "1.0";
 
     $scope.openDatabase = function () {
@@ -20,12 +19,11 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
     $scope.createTable = function (tx) {
 
         //Define the structure of the database
-        tx.executeSql('CREATE TABLE IF NOT EXISTS ' + tableName + '(id INT PRIMARY KEY, imageData TEXT)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS mediaData(id INT PRIMARY KEY, imageData TEXT)');
 
     };
 
     $scope.errorHandler = function (e) {
-        alert(e.message);
         console.log(e.message);
     };
 
@@ -38,7 +36,7 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
 
             $scope.db.transaction(function (tx) {
 
-                tx.executeSql("INSERT INTO MediaData(id, imageData) VALUES(?,?)", ['0', imageData]);
+                tx.executeSql("INSERT INTO mediaData(id, imageData) VALUES(?,?)", ['0', imageData]);
             }, function errorHandler(transaction, error) {
                 alert("Error : " + transaction.message);
             });
@@ -47,13 +45,15 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
     };
 
     $scope.deleteImage = function (callback) {
-        console.log('deleteImage');
 
         $scope.db.transaction(function (tx) {
 
-            tx.executeSql("DELETE FROM MediaData WHERE id = ?", ['0'], function (transaction) {
+            tx.executeSql("DELETE FROM mediaData WHERE id = ?", ['0'], function (transaction) {
                 //when image is deleted, the callback function is called
-                callback();
+                if (callback) {
+                    callback();
+                }
+
             }, function errorHandler(transaction, error) {
                 alert("Error : " + transaction.message);
             });
@@ -62,7 +62,6 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
     };
 
     $scope.loadImage = function () {
-        console.log("loadImage");
         $scope.db.transaction(function (tx) {
 
             tx.executeSql("SELECT * FROM MediaData WHERE id = ?", ["0"], function (transaction, results) {
@@ -72,8 +71,11 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
                     console.log(results.rows.item(0).imageData);
                     console.dir(results.rows);
 
-                  document.getElementById("imagePlaceholder").src = results.rows.item(0).imageData;
+                    document.getElementById("imagePlaceholder").src = results.rows.item(0).imageData;
                     $scope.$apply();
+                } else {
+                    //no image loaded
+                    document.getElementById("imagePlaceholder").src = null;
                 }
 
             }, function (t, e) {
