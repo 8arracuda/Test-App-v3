@@ -27,10 +27,6 @@ sdApp.controller('DE_PG_FileAPICtrl', function ($scope, $rootScope, FileApiDelet
 
     $scope.enableTab_singleValues();
 
-    //Functions for the Overlay
-    $scope.reloadFileList = function () {
-        showFiles();
-    };
 
     function showFiles() {
 

@@ -138,9 +138,9 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
 
                         reader.onloadend = function (e) {
 
-                            //alert(this.result);
+
                             console.log('this result: ' + this.result + '(from loadTable2FromPGFileAPI)');
-                            //alert(JSON.parse(this.result));
+
                             $scope.tableFromPGFileAPI = [];
                             $scope.tableFromPGFileAPI = JSON.parse(this.result);
 
@@ -161,7 +161,6 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
 
     $scope.deleteTable = function () {
         var filename = filenameForMethod2;
-        //$scope.inProgress = true;
 
         console.log('deleteTable2FromPGFileAPI');
         window.requestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
@@ -171,8 +170,6 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
                 fileEntry.remove(function () {
                     console.log(filename + ' has been removed.');
 
-                    //$scope.inProgress = false;
-                    //$scope.$apply();
                 }, errorHandler);
 
             }, errorHandler);
@@ -204,8 +201,6 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
                 msg = 'Unknown Error';
                 break;
         }
-        ;
-
 
         console.log('Error: ' + msg);
     }
@@ -222,9 +217,7 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
             case FileError.NOT_FOUND_ERR:
                 msg = 'NOT_FOUND_ERR';
                 $scope.tableFromPGFileAPI = [];
-
                 highlightDestinationTableTitle($scope);
-
                 break;
             case FileError.SECURITY_ERR:
                 msg = 'SECURITY_ERR';
@@ -239,7 +232,6 @@ sdApp.controller('DE_PG_FileAPI_strDataCtrl', function ($scope, $rootScope) {
                 msg = 'Unknown Error';
                 break;
         }
-        ;
 
         console.log('Error: ' + msg);
     }

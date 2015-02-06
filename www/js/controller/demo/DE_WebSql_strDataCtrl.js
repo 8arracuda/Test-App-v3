@@ -95,37 +95,4 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope, SQLDatab
 
     };
 
-    //$scope.fooErrorHandler = function () {
-    //    alert('fooErrorHandler');
-    //};
-
-
-    //$scope.dbReadyWebSQL = function () {
-    //    console.log('dbReadyWebSQL start');
-    //    $scope.db.transaction(function (tx) {
-    //
-    //        tx.executeSql("INSERT INTO einzelwerte(keyName, value) VALUES(?, ?)", [$scope.keyToSave, $scope.valueToSave]);
-    //        console.log('dbReadyWebSQL executed');
-    //    }, $scope.errorHandlerWebSQL, function () {
-    //        console.log('error occured in dbReadyWebSQL')
-    //    });
-    //};
-
-    //$scope.clearTable = function () {
-    //
-    //    //var answer = confirm('Do you really want to remove all entries from the database -strDaten-?');
-    //
-    //
-    //    $scope.db.transaction(function (tx) {
-    //        tx.executeSql("DELETE FROM strDaten", [], clearedTableCallback, $scope.errorHandlerWebSQL);
-    //    });
-    //    // $scope.$apply();
-    //
-    //
-    //};
-
-    //function clearedTableCallback(transaction, results) {
-    //    console.log('Table ' + tableName + ' has been cleared');
-    //}
-
 });
