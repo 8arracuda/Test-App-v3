@@ -18,7 +18,9 @@ sdApp.controller('DE_WebSql_singleValuesCtrl', function ($scope) {
 
             tx.executeSql("INSERT INTO singleValues(keyName, value) VALUES(?,?)", [$scope.keyToSave, $scope.valueToSave]);
         }, function errorHandler(transaction, error) {
-            alert("Error : " + transaction.message);
+            if (transaction.code == 6) {
+                alert('Key does already exist');
+            }
         });
 
     };

@@ -16,7 +16,7 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope, SQLDatab
 
     $scope.createTableStrData = function (tx) {
 
-        tx.executeSql('CREATE TABLE IF NOT EXISTS ' + tableName + '(id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, street TEXT, zipcode TEXT, city TEXT, email TEXT, randomNumber1 INTEGER, randomNumber2 INTEGER)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS strData (id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, street TEXT, zipcode TEXT, city TEXT, email TEXT, randomNumber1 INTEGER, randomNumber2 INTEGER)');
     };
 
     $scope.errorHandlerWebSQL = function (e) {
@@ -25,16 +25,16 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope, SQLDatab
         console.log('errorHandlerWebSQL executed');
     };
 
-    $scope.loadTableFromWebSQL = function () {
+    $scope.loadTable= function () {
 
         $scope.tableFromWebSQL = [];
 
 
         $scope.db.transaction(function (tx) {
 
-            console.log('SELECT * FROM strDaten');
+            console.log('SELECT * FROM strData');
 
-            tx.executeSql("SELECT * FROM " + tableName, [], function (transaction, results) {
+            tx.executeSql("SELECT * FROM strData", [], function (transaction, results) {
 
                 var length = results.rows.length;
 
@@ -69,19 +69,19 @@ sdApp.controller('DE_WebSql_strDataCtrl', function ($scope, $rootScope, SQLDatab
 
     };
 
-    $scope.saveTable1ToWebSQL = function () {
+    //$scope.saveTable1ToWebSQL = function () {
+    $scope.saveTable= function () {
 
         SQLDatabaseClearTable.clearTable($scope.db, tableName, function () {
 
-            console.log('saveTable1ToWebSQL start');
 
             $scope.db.transaction(function (tx) {
 
                 for (var i = 0; i < $rootScope.numberOfRows; i++) {
-                    tx.executeSql("INSERT INTO strDaten(id, firstName, lastName, street, zipcode, city, email, randomNumber1, randomNumber2) VALUES(?,?,?,?,?,?,?,?,?)", [$rootScope.data[i][0], $rootScope.data[i][1], $rootScope.data[i][2], $rootScope.data[i][3], $rootScope.data[i][4], $rootScope.data[i][5], $rootScope.data[i][6], $rootScope.data[i][7], $rootScope.data[i][8]]);
+                    tx.executeSql("INSERT INTO strData(id, firstName, lastName, street, zipcode, city, email, randomNumber1, randomNumber2) VALUES(?,?,?,?,?,?,?,?,?)", [$rootScope.data[i][0], $rootScope.data[i][1], $rootScope.data[i][2], $rootScope.data[i][3], $rootScope.data[i][4], $rootScope.data[i][5], $rootScope.data[i][6], $rootScope.data[i][7], $rootScope.data[i][8]]);
                 }
 
-                alert($rootScope.numberOfRows + ' addresses saved in WebSQL database  -' + tableName + '-?');
+                //alert($rootScope.numberOfRows + ' addresses saved in WebSQL database  -' + tableName + '-?');
 
             }, function errorHandler(transaction, error) {
                 alert("Error : " + transaction.message);

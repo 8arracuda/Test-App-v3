@@ -4,7 +4,6 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
     $scope.keyToSave = "a";
     $scope.valueToSave = "b";
     $scope.keyToRemove = "";
-    $scope.stringForEinzelwerteView = "";
 
     function getFilenameForSingleValues(key) {
         return 'key_' + key + '.txt';
@@ -48,7 +47,6 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
 
     };
 
-
     $scope.updateView = function () {
         console.log('updateEinzelwerteView');
 
@@ -65,12 +63,12 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
 
                         reader.onloadend = function (e) {
                             $scope.keyLoaded = $scope.keyToLoad;
-                            $scope.valueLoadedFromPGFileAPI = this.result;
+                            $scope.valueLoaded= this.result;
 
                             if (this.result == null) {
-                                $scope.valueLoadedFromPGFileAPI = 'does not exist';
+                                $scope.valueLoaded= 'does not exist';
                             } else {
-                                $scope.valueLoadedFromPGFileAPI = 'has value "' + this.result + '"';
+                                $scope.valueLoaded= 'has value "' + this.result + '"';
                             }
                             $scope.$apply();
 
@@ -79,11 +77,12 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
                         reader.readAsText(file);
                     }, errorHandler);
 
+
                 }, errorHandlerForUpdateMethod);
             },
             errorHandler
-        )
-        ;
+        );
+
     };
 
     $scope.removeKey= function () {
@@ -96,6 +95,7 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
 
                 fileEntry.remove(function () {
                     console.log(filename + ' has been removed.');
+                    alert(filename + ' has been removed.');
 
                     $scope.inProgress = false;
                     $scope.$apply();
@@ -105,43 +105,6 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
         }, errorHandler);
 
     };
-
-
-    //$scope.requestQuota = function() {
-    //    //window.webkitStorageInfo.requestQuota(PERSISTENT, 1024*1024, function(grantedBytes) {
-    //    var size = 5*1024*1024;
-    //
-    //    window.webkitStorageInfo.requestQuota(PERSISTENT, 10*1024*1024, function(grantedBytes) {
-    //        window.requestFileSystem(PERSISTENT, grantedBytes, onInitFs, errorHandler);
-    //    }, function(e) {
-    //        console.log('Error', e);
-    //    });
-    //};
-
-
-    //function onInitFs2(fs) {
-    //
-    //    //fs.root.getFile('log.txt', {create: true, exclusive: true}, function (fileEntry) {
-    //    fs.root.getFile('log.txt', {create: true}, function (fileEntry) {
-    //
-    //         fileEntry.isFile === true
-    //         fileEntry.name == 'log.txt'
-    //         fileEntry.fullPath == '/log.txt'
-    //
-    //    }, errorHandler);
-    //
-    //};
-
-    function updateSingleValuesViewString(errorMessage) {
-
-        if (errorMessage) {
-            $scope.stringForSingleValuesView = errorMessage;
-        } else {
-            $scope.stringForSingleValuesView = 'key: ' + $scope.keyLoaded + ' value: ' + $scope.valueLoadedFromPGFileAPI;
-        }
-
-        $scope.$apply();
-    }
 
     function errorHandler(e) {
         var msg = '';
@@ -153,6 +116,7 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
                 break;
             case FileError.NOT_FOUND_ERR:
                 msg = 'NOT_FOUND_ERR(1)';
+                alert('File not found');
                 break;
             case FileError.SECURITY_ERR:
                 msg = 'SECURITY_ERR';
@@ -167,7 +131,6 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
                 msg = 'Unknown Error';
                 break;
         }
-        ;
 
         console.log('Error: ' + msg);
     }
@@ -182,9 +145,8 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
                 break;
             case FileError.NOT_FOUND_ERR:
                 msg = 'NOT_FOUND_ERR(2)';
-
-                updateSingleValuesViewString('Key does not exist.');
-
+                $scope.valueLoaded= 'does not exist';
+                $scope.$apply();
                 break;
             case FileError.SECURITY_ERR:
                 msg = 'SECURITY_ERR';
@@ -199,7 +161,6 @@ sdApp.controller('DE_PG_FileAPI_singleValuesCtrl', function ($scope, $rootScope)
                 msg = 'Unknown Error';
                 break;
         }
-        ;
 
         console.log('Error: ' + msg);
     }

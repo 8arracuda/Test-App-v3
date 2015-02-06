@@ -64,7 +64,7 @@ sdApp.controller('DE_WebSql_mediaDataCtrl', function ($scope, ImageHelperFactory
     $scope.loadImage = function () {
         $scope.db.transaction(function (tx) {
 
-            tx.executeSql("SELECT * FROM MediaData WHERE id = ?", ["0"], function (transaction, results) {
+            tx.executeSql("SELECT * FROM mediaData WHERE id = ?", ["0"], function (transaction, results) {
 
                 if (results.rows.length > 0) {
                     console.log(results.rows.item(0).value);

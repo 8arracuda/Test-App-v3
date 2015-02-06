@@ -63,16 +63,12 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope, Index
             var request = objectStore.openCursor();
 
             transaction.oncomplete = function (event) {
-                console.log('transaction.oncomplete');
-
             };
 
             transaction.onerror = function (event) {
-                console.error('transaction.onerror');
             };
 
             request.onsuccess = function (event) {
-                console.log('request.onsuccess (in loadTableFromIndexedDB)');
 
                 var cursor = event.target.result;
 
@@ -111,11 +107,9 @@ sdApp.controller('DE_IndexedDB_strDataCtrl', function ($scope, $rootScope, Index
                 var request = window.indexedDB.open(dbName, 2);
 
                 request.onerror = function (event) {
-                    console.error('request.onerror');
                     alert("Database error: " + event.target.errorCode);
                 };
                 request.onsuccess = function (event) {
-                    console.log('request.onsuccess (in openDatabase)');
                     $scope.db = request.result;
 
                     //for updating the "status-light" on the openDatabase button

@@ -1,17 +1,9 @@
 <div content-for="title">
-    <!--<button ng-click="openWebSQLOverlay()">test</button><span>{{ stringForTitle }}</span>-->
     {{ stringForTitle }}
 </div>
 
-<!--<div content-for="navbarAction">-->
-    <!--<div class="btn btn-navbar">-->
-        <!--<i class="fa fa-plus"></i>{{ stringForRightButton }}-->
-    <!--</div>-->
-<!--</div>-->
 <div content-for="navbarAction">
-    <div class="btn btn-navbar">
-        <a ng-click="functionForRightButton()"><i class="fa fa-database"></i> {{ stringForRightButton }}</a>
-    </div>
+    <!--this codes overwrites the navbarAction with --nothing-- to leave a blank space there -->
 </div>
 
 <div class="scrollable">
@@ -73,26 +65,3 @@
         </div>
     </div>
 </div>
-
-<!--TODO: Das Overlay in eine seperate Datei auslagern-->
-<div overlay="myOverlay">
-    <div class="scrollable">
-        <div class="scrollable-content">
-
-            Databases<br>
-            <!--<div ng-repeat="database in databases">-->
-                <!--{{ database }}<br>-->
-                <button class="btn btn-default" ng-click="getTablesList()">getTablesList</button>
-                <div ng-repeat="row in tablesInDatabase track by $index">
-                    {{ row.tbl_name }}
-                </div>
-            <!--</div>-->
-
-        </div>
-    </div>
-
-</div>
-
-<div ng-include src="'DE_webSql_overlay_singleValues.html'"></div>
-<div ng-include src="'DE_webSql_overlay_strData.html'"></div>
-<div ng-include src="'DE_webSql_overlay_mediaData.html'"></div>

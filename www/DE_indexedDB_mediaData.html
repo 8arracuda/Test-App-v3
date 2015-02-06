@@ -20,8 +20,8 @@
 
         <div class="panel-body">
 
-            <a ng-click="saveImage()" class="btn btn-primary"><i class="fa fa-save"></i> save image</a>
-            <a ng-click="deleteImage()" class="btn btn-danger"><i class="fa fa-trash-o"></i> delete image</a>
+            <a ng-click="saveImage()" ng-class="{'disabled' :!databaseOpened }" class="btn btn-primary"><i class="fa fa-save"></i> save image</a>
+            <a ng-click="deleteImage()" ng-class="{'disabled' :!databaseOpened }" class="btn btn-danger"><i class="fa fa-trash-o"></i> delete image</a>
 
         </div>
         <h2 class="panel-title">

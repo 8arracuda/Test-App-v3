@@ -24,11 +24,6 @@ sdApp.controller('DE_IndexedDBCtrl', function ($scope, $rootScope) {
 
     $scope.enableTab_singleValues();
 
-    //Functions for the Overlay
-
-    //$scope.dbName = "PG12xp";
-    //$scope.dbVersion = "2";
-
     $scope.dbName = "TestAppDatabase";
     $scope.dbVersion = "1";
 

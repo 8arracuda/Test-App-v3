@@ -1,27 +1,8 @@
 <div ng-controller="DE_PG_FileAPI_strDataCtrl">
 
     <div class="panel" bs-panel>
-        <!--<div class="panel">-->
 
         <div ng-str-data-dataset-loader></div>
-
-        <!--<h4 class="panel-title">-->
-            <!--method1:-->
-        <!--</h4>-->
-
-        <!--<div class="panel-body">-->
-            <!--Every property (firstName, lastName, ...) is saved in a separate file. (prefix:-->
-            <!--"table1_")<br>-->
-            <!--<a class="btn btn-primary" ng-click="saveTable1ToPGFileAPI()"><i-->
-                    <!--class="fa fa-save"></i> save</a>-->
-
-            <!--<a class="btn btn-primary" ng-click="loadTable1FromPGFileAPI()"><i-->
-                    <!--class="fa fa-refresh"></i>-->
-                <!--load</a>-->
-
-            <!--<a class="btn btn-danger" ng-click="deleteTable1FromPGFileAPI()"><i-->
-                    <!--class="fa fa-trash-o"></i> delete</a>-->
-        <!--</div>-->
 
         <h4 class="panel-title">
             method2:
@@ -42,24 +23,13 @@
 
         </div>
 
-        <!--<h4 class="panel-title">-->
-        <!--<!--Table loaded from LocalStorage ({{ tableFromLocalStorage.length | number }} addresses)-->
-
-        <!--<div ng-class="cssVarForDestinationTable">Table loaded from LocalStorage ({{-->
-        <!--tableFromLocalStorage.length | number }} addresses)-->
-        <!--</div>-->
-
-        <!--</h4>-->
-
         <div class="panel-group" id="accordion">
 
             <div class="panel panel-default">
                 <div class="panel-heading" toggle target="collapseDestinationTable">
                     <h4 class="panel-title">
-                        <!--source-table [{{ tableOriginal.length | number }} addresses]-->
-                        <!--<div ng-class="cssVarForSourceTable">source-table  [{{ tableOriginal.length | number }} addresses]</div>-->
-                        <!--<div ng-class="cssVarForDestinationTable"><i class="fa fa-eye"></i>Table loaded from LocalStorage ({{-->
-                        <div ng-class="cssVarForDestinationTable">Table loaded from FileAPI (PhoneGap Plugin) ({{
+
+                        <div ng-class="cssVarForDestinationTable">Table loaded ({{
                             tableFromPGFileAPI.length | number }} addresses)
                         </div>
                     </h4>
