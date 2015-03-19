@@ -30,17 +30,13 @@
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/overrides.css"/>
 
-
-
     <meta name="msapplication-tap-highlight" content="no"/>
     <title>TestApp</title>
 </head>
 <body>
 
-
 <div ng-controller="SidebarController" class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in"
      id="mainSidebar">
-    <!--<h1 class="app-name">Test-App</h1>-->
     <h1 class="app-name"><a style="color:inherit; text-decoration: none" href="#/overview">T</a>est-App</h1>
 
     <div class="scrollable">
@@ -52,7 +48,7 @@
                    target="localStorageTab1"
                    toggle="on"
                    ng-click="tab = 1"
-                   active-class="active">Plattform-<br>Tests
+                   active-class="active">platform-<br>tests
                 </a>
 
                 <a class="btn btn-default btn-performanceTests"
@@ -60,7 +56,7 @@
                    target="localStorageTab2"
                    toggle="on"
                    ng-click="tab = 2"
-                   active-class="active">Performance-<br>Tests
+                   active-class="active">performance-<br>tests
                 </a>
 
                 <a class="btn btn-default btn-demonstration"
@@ -68,7 +64,7 @@
                    target="localStorageTab3"
                    toggle="on"
                    ng-click="tab = 3"
-                   active-class="active">Demonstration
+                   active-class="active">demonstration
                 </a>
             </div>
 
@@ -141,10 +137,11 @@
         </div>
 
         <div class="btn-group pull-right" yield-to="navbarAction">
-            <div class="btn btn-navbar">
-                <i class="fa fa-plus"></i> New2
+            <div class="btn btn-navbar" onclick="startAngularJS()">
+                startAngularJS
             </div>
         </div>
+
     </div>
 
     <div class="app-body">
@@ -153,7 +150,7 @@
 
 </div>
 
-<script type="text/javascript" src="/www/cordova.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
 
 <script type="text/javascript" src="/www/js/modernizr-latest.js"></script>
 
@@ -166,7 +163,6 @@
 
 <script type="text/javascript" src="/www/js/index.js"></script>
 
-<script type="text/javascript" src="/www/js/custom.js"></script>
 <script type="text/javascript" src="/www/js/customDirectives.js"></script>
 <script type="text/javascript" src="/www/js/routing.js"></script>
 
@@ -273,6 +269,7 @@
 <script type="text/javascript" src="/www/js/controller/PE_ParameterFactory.js"></script>
 <script type="text/javascript" src="/www/js/controller/FileApiDeleteAllFilesFactory.js"></script>
 <script type="text/javascript" src="/www/js/controller/IndexedDBClearObjectStore.js"></script>
+<script type="text/javascript" src="/www/js/controller/SQLDatabaseClearTable.js"></script>
 
 <script type="text/javascript" src="/www/js/controller/SidebarController.js"></script>
 <script type="text/javascript" src="/www/js/controller/NavbarController.js"></script>
